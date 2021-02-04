@@ -87,6 +87,8 @@ asyncFunction().then((value) => {
 つまり、 `.then()` などで登録したコールバック関数が呼ばれるのは１度だけ
 このようなことから、FulfilledとRejectedのどちらかの状態であることをSettled(不変の)と表現することがある。
 
+---
+
 ## 1.3 Promiseの書き方
 ### Promiseオブジェクトの作成
 作成の流れは以下のよう
@@ -104,9 +106,9 @@ function fetchURL(URL) {
         req.open("GET", URL, true);
         req.onload = () => {
             if (200 <= req.status && req.status < 300) {
-                resolve(req.responseText);
+                resolve(req.responseText);//①
             } else {
-                reject(new Error(req.statusText));
+                reject(new Error(req.statusText));//②
             }
         };
         req.onerror = () => {
@@ -124,3 +126,13 @@ fetchURL(URL).then(function onFulfilled(value){
     console.error(error);
 });
 ```
+①の `resolve(req.responseText)` ではレスポンスの内容を引数に入れている。
+
+こうすることで、コールバックと同様に値を次の処理（thenなど）へ渡せる。
+
+②のようなエラーの場合、`reject(new Error(req.statusText)）`のようにエラーの内容を引数に入れている。
+
+こうすることで、コールバックと同様に値を次の処理（catchなど）へ渡せる。
+
+reject に渡す値に制限はありませんが、一般的にErrorオブジェクト(またはErrorオブジェクトを継承したもの)を渡すことになっている。
+
