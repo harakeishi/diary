@@ -136,3 +136,6 @@ fetchURL(URL).then(function onFulfilled(value){
 
 reject に渡す値に制限はありませんが、一般的にErrorオブジェクト(またはErrorオブジェクトを継承したもの)を渡すことになっている。
 
+## まとめ
+- Promiseオブジェクトの作成の仕方
+- `.then` `.catch` を使ったPromiseオブジェクトの処理
