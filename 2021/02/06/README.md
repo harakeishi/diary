@@ -89,6 +89,14 @@ bind | split-window -h
 # - でペインを横に分割する
 bind - split-window -v
 
+# コピーモードを設定する
+set-window-option -g mode-keys vi
+
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xsel -bi"
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xsel -bi"
+
 # Vimのキーバインドでペインを移動する
 bind h select-pane -L
 bind j select-pane -D
